@@ -7,7 +7,6 @@ export default function Challenges() {
   const challenges = [
     {
       id: 1,
-      // Unsplash: Server room/data center
       image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", 
       challengeTitle: "Disconnected Legacy Systems",
       challengeDesc: "Outdated infrastructure and fragmented platforms slowing down your daily operational efficiency.",
@@ -17,7 +16,6 @@ export default function Challenges() {
     },
     {
       id: 2,
-      // Unsplash: Abstract scaling/code
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", 
       challengeTitle: "Scaling Bottlenecks",
       challengeDesc: "Off-the-shelf software failing to adapt to your growing business needs and complex workflows.",
@@ -27,7 +25,6 @@ export default function Challenges() {
     },
     {
       id: 3,
-      // Unsplash: IT management/dashboard
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80", 
       challengeTitle: "IT Management Overhead",
       challengeDesc: "Draining internal resources on routine system maintenance rather than strategic business growth.",
@@ -52,19 +49,24 @@ export default function Challenges() {
         {/* Challenges Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {challenges.map((item) => (
-            <div key={item.id} className="flex flex-col group cursor-pointer">
+            <div 
+              key={item.id} 
+              // Added tabIndex and focus:outline-none to enable mobile tap-to-focus
+              tabIndex={0} 
+              className="flex flex-col group cursor-pointer focus:outline-none"
+            >
               
-              {/* Image Container with Hover Overlay */}
+              {/* Image Container with Hover/Focus Overlay */}
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-6 shadow-sm bg-slate-100">
-                {/* Standard img tag used here for external URL testing */}
                 <img
                   src={item.image}
                   alt={item.challengeTitle}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  // Added group-focus and group-active scaling for mobile
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-focus:scale-105 group-active:scale-105"
                 />
                 
-                {/* Dark Hover Overlay */}
-                <div className="absolute inset-0 bg-slate-900/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6 z-10 backdrop-blur-[2px]">
+                {/* Dark Hover/Focus Overlay - Now responds to taps on mobile */}
+                <div className="absolute inset-0 bg-slate-900/85 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-active:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-6 z-10 backdrop-blur-[2px]">
                   <item.Icon className="text-golomon-secondary w-10 h-10 mb-4" strokeWidth={1.5} />
                   <h3 className="text-white font-bold text-xl mb-3">
                     {item.solutionTitle}
