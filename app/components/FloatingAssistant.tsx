@@ -72,7 +72,7 @@ export default function FloatingAssistant() {
       }
 
       setMessages(prev => [...prev, { id: Date.now() + 1, sender: "bot", text: botReply }]);
-    }, 600); // 600ms typing delay
+    }, 600);
   };
 
   const toggleChat = () => {
@@ -80,7 +80,6 @@ export default function FloatingAssistant() {
     if (showInitialTooltip) setShowInitialTooltip(false);
   };
 
-  // The tooltip shows either if it's the initial 10s window, OR if the user is hovering over the button
   const shouldShowTooltip = (showInitialTooltip || isHovered) && !isOpen;
 
   return (
@@ -128,7 +127,6 @@ export default function FloatingAssistant() {
               </div>
             ))}
 
-            {/* Quick Actions (Show if only the first welcome message exists) */}
             {messages.length === 1 && (
               <div className="flex flex-wrap gap-2 pt-2">
                 {quickActions.map((action) => (
@@ -147,8 +145,6 @@ export default function FloatingAssistant() {
 
           {/* Footer / Input Area */}
           <div className="bg-white p-3 border-t border-slate-100 flex flex-col gap-3">
-            
-            {/* Contact Action Buttons */}
             <div className="flex gap-2">
               <a 
                 href="mailto:info@golomon.com" 
@@ -166,7 +162,6 @@ export default function FloatingAssistant() {
               </a>
             </div>
 
-            {/* Input Field */}
             <form 
               onSubmit={(e) => { e.preventDefault(); handleSend(inputValue); }}
               className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full p-1 pl-4 focus-within:border-golomon-primary transition-colors"
@@ -187,7 +182,6 @@ export default function FloatingAssistant() {
               </button>
             </form>
           </div>
-
         </div>
       )}
 
@@ -197,17 +191,14 @@ export default function FloatingAssistant() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Tooltip Bubble */}
+        {/* Tooltip Bubble - hidden md:block added to prevent appearing on mobile */}
         {shouldShowTooltip && (
-          <div className="absolute right-[115%] bottom-2 w-64 bg-white p-3.5 rounded-xl shadow-[0_5px_20px_rgba(0,0,0,0.1)] border border-slate-100 text-sm text-slate-700 animate-in fade-in slide-in-from-right-4 duration-300">
+          <div className="hidden md:block absolute right-[115%] bottom-2 w-64 bg-white p-3.5 rounded-xl shadow-[0_5px_20px_rgba(0,0,0,0.1)] border border-slate-100 text-sm text-slate-700 animate-in fade-in slide-in-from-right-4 duration-300">
             <strong>Need help?</strong> Ask us about our products, pricing or support.
-            {/* Tooltip Tail */}
             <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-4 h-4 bg-white border-r border-t border-slate-100 rotate-45"></div>
           </div>
         )}
 
-        {/* The Button with Glow Effect */}
-        {/* Added shadow-[0_0_20px_rgba(0,54,144,0.4)] for the permanent soft glow, increasing intensity on hover */}
         <button
           onClick={toggleChat}
           className="w-16 h-16 bg-golomon-primary hover:bg-blue-900 text-white rounded-full shadow-[0_0_20px_rgba(0,54,144,0.4)] hover:shadow-[0_0_25px_rgba(0,54,144,0.6)] flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"

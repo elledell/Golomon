@@ -40,7 +40,6 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // Calculate the next and previous indices for the hover previews
   const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
   const nextIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
 
@@ -74,21 +73,21 @@ export default function Hero() {
       {/* Smooth Gradient Overlay */}
       <div className="absolute inset-0 z-10 bg-gradient-to-r from-white via-white/85 to-white/10 md:to-transparent"></div>
 
-      {/* Content - Increased horizontal padding (px-20 lg:px-28) to prevent text from overlapping the arrows */}
-      <div className="max-w-[1400px] mx-auto px-20 lg:px-28 w-full relative z-20">
+      {/* Content - Adjusted text sizes and max-widths for mobile readability */}
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 md:px-20 lg:px-28 w-full relative z-20">
         <div className="max-w-2xl">
           <div className="flex items-center gap-3 mb-4">
             <span className="h-[2px] w-8 bg-golomon-secondary"></span>
-            <span className="text-golomon-secondary font-bold text-sm tracking-widest uppercase">
+            <span className="text-golomon-secondary font-bold text-xs sm:text-sm tracking-widest uppercase">
               {slides[currentSlide].tagline}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15] mb-5 tracking-tight transition-opacity duration-500">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#001433] leading-[1.15] mb-5 tracking-tight transition-opacity duration-500 pr-2 md:pr-4">
             {slides[currentSlide].title}
           </h1>
           
-          <p className="text-lg text-slate-700 mb-8 leading-relaxed transition-opacity duration-500 font-medium max-w-xl">
+          <p className="text-base md:text-lg text-slate-700 mb-8 leading-relaxed transition-opacity duration-500 font-medium max-w-[95%] md:max-w-xl">
             {slides[currentSlide].description}
           </p>
           
@@ -109,15 +108,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Slider Controls with Image Previews */}
+      {/* Slider Controls with Image Previews - Hidden on mobile via "hidden md:flex" */}
       
       {/* Previous Button */}
       <button
         onClick={prevSlide}
-        className="group absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full flex items-center justify-center bg-white/80 shadow-md transition-all border border-gray-200 overflow-hidden"
+        className="hidden md:flex group absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full items-center justify-center bg-white/80 shadow-md transition-all border border-gray-200 overflow-hidden"
         aria-label="Previous slide"
       >
-        {/* The image that fades in on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
           <Image
             src={slides[prevIndex].image}
@@ -125,11 +123,8 @@ export default function Hero() {
             fill
             className="object-cover"
           />
-          {/* Dark overlay to make the white arrow visible */}
           <div className="absolute inset-0 bg-slate-900/40"></div>
         </div>
-        
-        {/* The Arrow Icon */}
         <ChevronLeft 
           size={28} 
           className="relative z-10 text-slate-800 group-hover:text-white transition-colors" 
@@ -139,10 +134,9 @@ export default function Hero() {
       {/* Next Button */}
       <button
         onClick={nextSlide}
-        className="group absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full flex items-center justify-center bg-white/80 shadow-md transition-all border border-gray-200 overflow-hidden"
+        className="hidden md:flex group absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full items-center justify-center bg-white/80 shadow-md transition-all border border-gray-200 overflow-hidden"
         aria-label="Next slide"
       >
-        {/* The image that fades in on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
           <Image
             src={slides[nextIndex].image}
@@ -150,11 +144,8 @@ export default function Hero() {
             fill
             className="object-cover"
           />
-          {/* Dark overlay to make the white arrow visible */}
           <div className="absolute inset-0 bg-slate-900/40"></div>
         </div>
-        
-        {/* The Arrow Icon */}
         <ChevronRight 
           size={28} 
           className="relative z-10 text-slate-800 group-hover:text-white transition-colors" 
